@@ -1,0 +1,29 @@
+--Create a grocery store database
+
+CREATE TABLE store_items (id INTEGER PRIMARY KEY, item TEXT, price NUMERIC, quantity INTEGER, aisle INTEGER);
+
+INSERT INTO store_items VALUES (1, "Cat Food", 5.00, 10, 1);
+INSERT INTO store_items VALUES (2, "Dog Food", 10.00, 10, 2);
+INSERT INTO store_items VALUES (3, "Fish Food", 2.00, 10, 3);
+INSERT INTO store_items VALUES (4, "Rodent Food", 10.00, 10, 4);
+INSERT INTO store_items VALUES (5, "Reptile Food", 5.00, 10, 5);
+INSERT INTO store_items VALUES (6, "Cat Beds", 20.00, 10, 1);
+INSERT INTO store_items VALUES (7, "Scratching Posts", 40, 10, 1);
+INSERT INTO store_items VALUES (8, "Litter Box", 15, 10, 1);
+INSERT INTO store_items VALUES (9, "Food Bowls", 12, 10, 1);
+INSERT INTO store_items VALUES (10, "Dog Beds", 40, 10, 2);
+INSERT INTO store_items VALUES (11, "Dog Treats", 10, 20, 2);
+INSERT INTO store_items VALUES (12, "Dog Toys", 10, 30, 2);
+INSERT INTO store_items VALUES (13, "Dog Collars", 5, 50, 2);
+INSERT INTO store_items VALUES (14, "Dog Tags", 3, 100, 2);
+INSERT INTO store_items VALUES (15, "Fish Bowl", 5, 20, 3);
+INSERT INTO store_items VALUES (16, "Reptile Tank", 20, 15, 5);
+INSERT INTO store_items VALUES (17, "Rodent Cage", 25, 12, 4);
+
+--display the database ordered by price. 
+
+SELECT * FROM store_items ORDER BY price;
+
+--what is the total number of items in the store?
+
+SELECT SUM(quantity) FROM store_items;
