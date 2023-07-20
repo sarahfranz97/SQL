@@ -1,0 +1,75 @@
+/* Create table about the people and what they do here */
+CREATE TABLE persons (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fullname TEXT,
+    hometown TEXT);
+INSERT INTO persons (fullname, hometown) VALUES ("Thomas Rhett", "Georgia");
+INSERT INTO persons (fullname, hometown) VALUES ("Luke Bryan", "Georgia");
+INSERT INTO persons (fullname, hometown) VALUES ("Luke Combs", "North Carolina");
+INSERT INTO persons (fullname, hometown) VALUES ("Kellie Pickler", "North Carolina");
+INSERT INTO persons (fullname, hometown) VALUES ("Zach Bryan", "Oklahoma");
+INSERT INTO persons (fullname, hometown) VALUES ("Garth Brooks", "Oklahoma");
+INSERT INTO persons (fullname, hometown) VALUES ("Dolly Parton", "Tennessee");
+INSERT INTO persons (fullname, hometown) VALUES ("Kenny Chesny", "Tennessee");
+INSERT INTO persons (fullname, hometown) VALUES ("Willie Nelson", "Texas");
+INSERT INTO persons (fullname, hometown) VALUES ("George Strait", "Texas");
+INSERT INTO persons (fullname, hometown) VALUES ("Miranda Lambert", "Texas");
+INSERT INTO persons (fullname, hometown) VALUES ("Jon Pardi", "California");
+INSERT INTO persons (fullname, hometown) VALUES ("Tyler Childers", "Kentucky");
+INSERT INTO persons (fullname, hometown) VALUES ("Chris Stapleton", "Kentucky");
+INSERT INTO persons (fullname, hometown) VALUES ("Luke Grimes", "Ohio");
+
+CREATE TABLE songs (
+    person_id INTEGER,
+    songname TEXT);
+INSERT INTO songs (person_id, songname) VALUES (1, "Die a Happy Man");
+INSERT INTO songs (person_id, songname) VALUES (2, "Country Girl");
+INSERT INTO songs (person_id, songname) VALUES (3, "Fast Car");
+INSERT INTO songs (person_id, songname) VALUES (4, "Red High Heels");
+INSERT INTO songs (person_id, songname) VALUES (5, "Something in the Orange");
+INSERT INTO songs (person_id, songname) VALUES (6, "Friends in Low Places");
+INSERT INTO songs (person_id, songname) VALUES (7, "Jolene");
+INSERT INTO songs (person_id, songname) VALUES (8, "American Kids");
+INSERT INTO songs (person_id, songname) VALUES (9, "Mama Don't Let Your Babies Grow up to Be Cowboys");
+INSERT INTO songs (person_id, songname) VALUES (10, "Check Yes Or No");
+INSERT INTO songs (person_id, songname) VALUES (11, "Mama's Broken Heart");
+INSERT INTO songs (person_id, songname) VALUES (12, "Dirt on My Boots");
+INSERT INTO songs (person_id, songname) VALUES (13, "All Your'n");
+INSERT INTO songs (person_id, songname) VALUES (14, "Tennessee Whiskey");
+INSERT INTO songs (person_id, songname) VALUES (15, "No Horse to Ride");
+
+CREATE table same_hometown (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person1_id INTEGER,
+    person2_id INTEGER);
+INSERT INTO same_hometown (person1_id, person2_id)
+    VALUES (1, 2);
+INSERT INTO same_hometown (person1_id, person2_id)
+    VALUES (3, 4);
+INSERT INTO same_hometown (person1_id, person2_id)
+    VALUES (5, 6);
+INSERT INTO same_hometown (person1_id, person2_id)
+    VALUES (7,8);
+INSERT INTO same_hometown (person1_id, person2_id)
+    VALUES (9, 10);
+INSERT INTO same_hometown (person1_id, person2_id)
+    VALUES (9, 11);
+INSERT INTO same_hometown (person1_id, person2_id)
+    VALUES (10, 11);
+INSERT INTO same_hometown (person1_id, person2_id)
+    VALUES (13, 14);
+
+/* Display table of id, fullname, and hometown */
+SELECT * FROM persons;
+
+/* Singer's name and the song they sing */
+SELECT persons.fullname, songs.songname FROM songs
+JOIN persons
+ON persons.id = songs.person_id;
+
+/* Which singers have the same hometown? Display both names and the hometown */
+SELECT a.fullname as person_1, b.fullname as person_2, a.hometown FROM same_hometown
+    JOIN persons a
+    ON person1_id = a.id
+    JOIN persons b
+    ON person2_id = b.id;
