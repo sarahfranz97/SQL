@@ -1,0 +1,87 @@
+# For this project, I downloaded Spotify top 50 songs in 2021 from Kaggle as SpotifyData in my database.
+# Then I created a table to insert the Spotify data into.
+# Finally, I performed analytics on the data using SQL.
+
+# Creating the table:
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+song_key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+song_mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness decimal(8,7) NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL )
+
+# Then I inserted the Spotifydata.csv into the table
+
+#Next, I came up with qustions and explored the data using the following SQL:
+
+#1. What is the average danceability by artist and track in descending order?
+SELECT
+artist_name,track_name,avg(danceability)
+FROM BIT_DB.spotifydata
+GROUP BY artist_name, track_name
+ORDER BY avg(danceability) DESC
+
+#2. Who are the top 10 artists based on popluarity?
+SELECT track_name, artist_name, popularity
+FROM BIT_DB.spotifydata
+ORDER BY popularity desc
+LIMIT 10
+
+#3. What artist released the longest song?
+SELECT artist_name, track_name, duration_ms
+FROM BIT_DB.spotifydata
+ORDER BY duration_ms DESC
+LIMIT 1
+
+#4. What is the average danceability for the 10 most popular songs?
+SELECT artist_name, track_name, popularity, avg(danceability)
+FROM BIT_DB.spotifydata
+GROUP BY artist_name
+ORDER BY popularity DESC
+LIMIT 10
+
+#5. Which artist is on the top 50 chart the most?
+SELECT artist_name, count(artist_name)
+FROM BIT_DB.spotifydata
+GROUP BY artist_name
+ORDER BY count(artist_name) DESC
+
+#6. Which tracks have the lowest speechiness(the value of spoken words in the song)?
+SELECT track_name, artist_name, speechiness
+FROM BIT_DB.spotifydata
+ORDER BY speechiness ASC
+
+#7. What are the top five loudest songs/tracks?
+SELECT track_name, artist_name, loudness
+FROM BIT_DB.spotifydata
+ORDER BY loudness DESC
+
+#8. What are the ten least popular tracks on the chart?
+SELECT track_name, artist_name, popularity
+FROM BIT_DB.spotifydata
+ORDER BY popularity ASC
+LIMIT 10
+
+#9. What is the average energy per artist?
+SELECT artist_name, avg(energy)
+FROM BIT_DB.spotifydata
+GROUP BY artist_name
+
+#10. What tracks have a tempo above 140 BPM?
+SELECT track_name, artist_name, tempo
+FROM BIT_DB.spotifydata
+WHERE tempo>140
+ORDER BY tempo
