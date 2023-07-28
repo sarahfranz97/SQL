@@ -1,0 +1,27 @@
+/* What does the app's SQL look like? */
+CREATE TABLE workout_log (
+    id INTEGER PRIMARY KEY,
+    exercise TEXT, 
+    sets INTEGER,
+    repetitions INTEGER,
+    heart_rate INTEGER,
+    rating INTEGER);
+INSERT INTO workout_log (exercise, sets, repetitions, heart_rate, rating) VALUES ("squats", 4, 10, 155, 4);
+INSERT INTO workout_log (exercise, sets, repetitions, heart_rate, rating) VALUES ("bench press", 3, 8, 120, 3);
+INSERT INTO workout_log (exercise, sets, repetitions, heart_rate, rating) VALUES ("pull up", 3, 10, 130, 3);
+INSERT INTO workout_log (exercise, sets, repetitions, heart_rate, rating) VALUES ("deadlift", 4, 6, 120, 2);
+INSERT INTO workout_log (exercise, sets, repetitions, heart_rate, rating) VALUES ("crunches", 3, 20, 110, 3);
+
+# Adding in a column for how much weight is used for each exercise
+
+ALTER TABLE workout_log ADD COLUMN weight INTEGER default "N/A";
+SELECT * FROM workout_log;
+
+# Updating my *app* with the amount of weight I use for each exercise (in lbs.)
+UPDATE workout_log SET weight = 95 WHERE exercise IN ("squats");
+UPDATE workout_log SET weight = 55 WHERE exercise IN ("bench press");
+UPDATE workout_log SET weight = 120 WHERE exercise IN ("deadlift");
+SELECT * FROM workout_log;
+
+DELETE FROM workout_log WHERE id = 4;
+SELECT * FROM workout_log;
